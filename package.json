@@ -43,6 +43,7 @@
     "@iconify-json/fa6-solid": "^1.2.4",
     "@iconify-json/material-symbols": "^1.2.35",
     "@iconify-json/simple-icons": "^1.2.48",
-    "@iconify-json/vscode-icons": "^1.2.29"
+    "@iconify-json/vscode-icons": "^1.2.29",
+    "eslint": "^10.0.3"
   }
 }
