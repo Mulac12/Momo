@@ -8,7 +8,7 @@ draft: false
 slugId: momo/intro/comment
 ---
 
-Momo supports adding comment functionality and offers two deployment methods, including serverless deployment. For details, visit the repository [Momo-backend](https://github.com/Motues/Momo-Backend).
+木木 supports adding comment functionality and offers two deployment methods, including serverless deployment. For details, visit the repository [Momo-backend](https://github.com/Motues/Momo-Backend).
 
 ::github{repo="Motues/Momo-Backend"}
 

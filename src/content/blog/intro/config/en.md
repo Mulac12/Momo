@@ -1,5 +1,5 @@
 ---
-title: Momo Configuration Guide
+title: 木木 Configuration Guide
 pubDate: 2025-09-28
 description: Website Configuration
 category: Instruction

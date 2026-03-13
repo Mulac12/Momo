@@ -1,4 +1,4 @@
-# Momo
+# 木木
 
 <div align="center">
     <img src="./images/index-light-en.jpg">
@@ -9,7 +9,7 @@
 
 ## ✨ Features
 
-Momo originates from Xiaohongshu📕, serving as the default nickname for every new user—symbolizing a fresh start. This philosophy guides our blog design, striking a balance between complex functionality and minimalist aesthetics.
+木木 originates from Xiaohongshu📕, serving as the default nickname for every new user—symbolizing a fresh start. This philosophy guides our blog design, striking a balance between complex functionality and minimalist aesthetics.
 
 * **Minimalist Design**: Clean page layout with black and white as primary colors, accented by blue
 * **Dark Mode**: Supports manual switching or automatic system adaptation
@@ -31,11 +31,11 @@ Momo originates from Xiaohongshu📕, serving as the default nickname for every 
 
 ## 🔧 Configuration
 
-Refer to the [Configuration Guide](./config_en.md). For detailed information, visit [Momo](https://momo.motues.top/en/intro/config) and read the corresponding articles.
+Refer to the [Configuration Guide](./config_en.md). For detailed information, visit [木木](https://momo.motues.top/en/intro/config) and read the corresponding articles.
 
 ## 📚 Updating
 
-Refer to the [Update Guide](./release_en.md) for instructions on updating your project. Visit [Momo](https://momo.motues.top/en/intro/release) for detailed information.
+Refer to the [Update Guide](./release_en.md) for instructions on updating your project. Visit [木木](https://momo.motues.top/en/intro/release) for detailed information.
 
 ## ⚡ Commands
 

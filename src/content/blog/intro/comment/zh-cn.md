@@ -8,7 +8,7 @@ draft: false
 slugId: momo/intro/comment
 ---
 
-Momo 支持添加评论功能，并提供两种部署方式，支持零服务器部署。详情访问仓库[Momo-backend](https://github.com/Motues/Momo-Backend)。
+木木 支持添加评论功能，并提供两种部署方式，支持零服务器部署。详情访问仓库[Momo-backend](https://github.com/Motues/Momo-Backend)。
 
 ::github{repo="Motues/Momo-Backend"}
 

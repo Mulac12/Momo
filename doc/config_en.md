@@ -1,4 +1,4 @@
-# Momo Configuration Guide
+# 木木 Configuration Guide
 
 ## Website Information Configuration
 
