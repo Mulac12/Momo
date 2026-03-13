@@ -1,5 +1,3 @@
-import { i18n } from "astro:config/client";
-
 function joinUrl(...parts: string[]): string {
 	const joined = parts.join("/");
 	return joined.replace(/\/+/g, "/");
@@ -35,12 +33,6 @@ export function blogCoverUrl(contentPath: string, blogName: string): string {
     return joinUrl("content/blog/", blogName, normalizedPath)
 }
 
-export function getRelativeLocaleUrl(lang: string, path: string) : string { 
-    const prefixDefaultLocale = i18n.routing.prefixDefaultLocale;
-    if(prefixDefaultLocale) {
-        return joinUrl("/", lang, path);
-    }else {
-        if(lang === i18n.defaultLocale) return joinUrl("/", path);
-        return joinUrl("/", lang, path);
-    }
+export function getRelativeUrl(path: string): string {
+	return joinUrl("/", path);
 }

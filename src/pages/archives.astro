@@ -1,0 +1,16 @@
+---
+import MainPageLayout from '@layouts/MainPageLayout.astro';
+import ArchivePanel from '@components/ArchivePanel.svelte';
+import FabMenu from '@components/control/FabMenu.astro';
+import { siteConfig } from '@/config';
+import { getBlogEntrySort } from '@utils/content-utils';
+import { uiText } from '@constants/ui-text';
+
+const allBlogPosts = await getBlogEntrySort();
+const pageTitle = `${uiText.header.archive} - ${siteConfig.title}`;
+---
+
+<MainPageLayout title={pageTitle}>
+  <ArchivePanel client:only="svelte" sortedPosts={allBlogPosts} />
+  <FabMenu showBackBottom={true} />
+</MainPageLayout>

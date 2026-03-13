@@ -1,7 +1,6 @@
 ---
-import { i18n } from "astro:config/client";
-import i18nit from '@i18n/translation'
-import { getRelativeLocaleUrl } from '@utils/url-utils';
+import { getRelativeUrl } from '@utils/url-utils';
+import { uiText } from '@constants/ui-text';
 
 const { page } = Astro.props;
 
@@ -44,9 +43,6 @@ const getPageUrl = (p: number) => {
   return p === 1 ? '/' : `/${p}/`;
 };
 
-const currentLang = Astro.currentLocale || i18n!.defaultLocale;
-const t = i18nit(currentLang);
-
 // 样式类：整合了移动端和桌面端的差异
 const btnBaseClass = "p-2 md:px-4 md:py-2 flex items-center border rounded-lg transition-all duration-200";
 const btnActiveProps = "text-[var(--text-color)] hover:bg-[var(--button-hover-color)] border-[var(--button-border-color)] active:scale-90";
@@ -56,14 +52,14 @@ const btnDisabledProps = "text-[var(--text-color-30)] border-[var(--button-borde
 <nav data-aos="fade-up" class="flex flex-row justify-between items-center gap-1 my-8 max-w-[var(--page-width)] mx-auto text-sm">
   
   <a 
-    href={showPrevious ? getRelativeLocaleUrl(currentLang, getPageUrl(currentPage - 1)) : "#"} 
+    href={showPrevious ? getRelativeUrl(getPageUrl(currentPage - 1)) : "#"} 
     class={`${btnBaseClass} ${showPrevious ? btnActiveProps : btnDisabledProps}`}
     aria-label="Previous Page"
   >
     <svg class="w-5 h-5 md:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
     </svg>
-    <span class="hidden md:inline">{t("pageNavigation.previous")}</span>
+    <span class="hidden md:inline">{uiText.pageNavigation.previous}</span>
   </a>
 
   <div class="flex items-center gap-1 md:gap-2 flex-nowrap overflow-x-auto no-scrollbar">
@@ -83,7 +79,7 @@ const btnDisabledProps = "text-[var(--text-color-30)] border-[var(--button-borde
       const isCurrent = p === currentPage;
       return (
         <a
-          href={getRelativeLocaleUrl(currentLang, getPageUrl(p as number))}
+          href={getRelativeUrl(getPageUrl(p as number))}
           class={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-lg border transition-all duration-200 
             ${isCurrent 
               ? 'border-[var(--button-border-color)] font-bold text-[var(--text-color)] pointer-events-none' 
@@ -97,11 +93,11 @@ const btnDisabledProps = "text-[var(--text-color-30)] border-[var(--button-borde
   </div>
 
   <a 
-    href={showNext ? getRelativeLocaleUrl(currentLang, getPageUrl(currentPage + 1)) : "#"} 
+    href={showNext ? getRelativeUrl(getPageUrl(currentPage + 1)) : "#"} 
     class={`${btnBaseClass} ${showNext ? btnActiveProps : btnDisabledProps}`}
     aria-label="Next Page"
   >
-    <span class="hidden md:inline">{t("pageNavigation.next")}</span>
+    <span class="hidden md:inline">{uiText.pageNavigation.next}</span>
     <svg class="w-5 h-5 md:ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
     </svg>

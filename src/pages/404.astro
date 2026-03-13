@@ -2,43 +2,33 @@
 import MainPageLayout from '@layouts/MainPageLayout.astro';
 import ImageModule from '@components/misc/ImageModule.astro';
 import Cover from '@components/Cover.astro';
-import { getRelativeLocaleUrl } from '@utils/url-utils';
+import { getRelativeUrl } from '@utils/url-utils';
 
-import { siteConfig } from '@/config'
+import { siteConfig } from '@/config';
+import { uiText } from '@constants/ui-text';
 
-import { i18n } from "astro:config/client";
-import i18nit from '@i18n/translation'
-
-const currentLang = Astro.currentLocale || i18n!.defaultLocale;
-const t = i18nit(currentLang);
-
-console.log("404 page loaded with locale:", currentLang);
-
-const pageTitle = "404 - " + siteConfig.title;
-const indexPage = getRelativeLocaleUrl(currentLang, "/");
+const pageTitle = `404 - ${siteConfig.title}`;
+const indexPage = getRelativeUrl("/");
 ---
-<MainPageLayout title={pageTitle} lang="zh-CN">
-    <div class="mx-auto w-full max-w-[var(--page-width)] px-4 text-center">
-        <Cover title={t("page404.title")} subTitle={t("page404.subTitle")} />
-        
-        <div class="my-4">
-            <ImageModule src={"assets/404.png"} alt="404" class="mx-auto w-auto h-auto hover:animate-spin transition-transform" />
-        </div>
 
-        <div class="mt-8 flex flex-col items-center">
-            <p class="text-[var(--text-color-70)]">{t("page404.notice")}</p>
-            <div class=" mt-2 flex gap-4">
-                <a href={indexPage} 
-                class="px-6 py-2 bg-[var(--link-color)] text-white rounded-lg hover:opacity-90 transition-all">
-                    {t("page404.backToHome")}
-                </a>
-                <a href="javascript:history.back()" 
-                class="px-6 py-2 border border-[var(--button-border-color)] rounded-lg text-[var(--text-color)] hover:bg-[var(--button-hover-color)] transition-all">
-                    {t("page404.backToPreview")}
-                </a>
-            </div>
-        </div>
+<MainPageLayout title={pageTitle}>
+  <div class="mx-auto w-full max-w-[var(--page-width)] px-4 text-center">
+    <Cover title={uiText.page404.title} subTitle={uiText.page404.subTitle} />
 
-        <!-- <p class="mt-4 text-sm text-[var(--text-color-70)]">{t("page404.errorCode")}</p> -->
+    <div class="my-4">
+      <ImageModule src={"assets/404.png"} alt="404" class="mx-auto w-auto h-auto hover:animate-spin transition-transform" />
     </div>
+
+    <div class="mt-8 flex flex-col items-center">
+      <p class="text-[var(--text-color-70)]">{uiText.page404.notice}</p>
+      <div class="mt-2 flex gap-4">
+        <a href={indexPage} class="px-6 py-2 bg-[var(--link-color)] text-white rounded-lg hover:opacity-90 transition-all">
+          {uiText.page404.backToHome}
+        </a>
+        <a href="javascript:history.back()" class="px-6 py-2 border border-[var(--button-border-color)] rounded-lg text-[var(--text-color)] hover:bg-[var(--button-hover-color)] transition-all">
+          {uiText.page404.backToPrevious}
+        </a>
+      </div>
+    </div>
+  </div>
 </MainPageLayout>

@@ -1,38 +1,31 @@
 ---
-import type { SearchResult } from "@/global"
+import type { SearchResult } from "@/global";
 import { baseUrl } from "@utils/url-utils";
-import { getEntry, render } from 'astro:content'
-import { i18n } from "astro:config/client";
-import i18nit from "@i18n/translation";
-
-
-
-const currentLang = Astro.currentLocale || i18n!.defaultLocale;
-const t = i18nit(currentLang);
+import { uiText } from "@constants/ui-text";
 
 const translations = {
-  placeholder: t("search.placeholder"),
-  error: t("search.error"),
-  noresult: t("search.noresult")
+  placeholder: uiText.search.placeholder,
+  error: uiText.search.error,
+  noresult: uiText.search.noresult,
+  unavailable: uiText.search.unavailable,
 };
 
 const fakeResult: SearchResult[] = [
-	{
-		url: baseUrl("/"),
-		meta: {
-			title: "This Is a Fake Search Result",
-		},
-		excerpt:
-			"Because the search cannot work in the <mark>dev</mark> environment.",
-	},
-	{
-		url: baseUrl("/"),
-		meta: {
-			title: "If You Want to Test the Search",
-		},
-		excerpt: "Try running <mark>pnpm build && pnpm preview</mark> instead.",
+  {
+    url: baseUrl("/"),
+    meta: {
+      title: "这是一个示例搜索结果",
+    },
+    excerpt: "因为在 <mark>dev</mark> 环境下，本地搜索不会真正工作。",
+  },
+  {
+    url: baseUrl("/"),
+    meta: {
+      title: "如果你想测试搜索",
+    },
+    excerpt: "请改用 <mark>pnpm build && pnpm preview</mark>。",
   }
-]
+];
 ---
 <div id="search-modal" class="fixed inset-0 z-[100] opacity-0 pointer-events-none">
   <div class="absolute inset-0 modal-backdrop opacity-0" aria-hidden="true"></div>
@@ -43,11 +36,11 @@ const fakeResult: SearchResult[] = [
         <svg class="w-5 h-5 text-[var(--text-color-70)] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
-        <input 
-          type="text" 
+        <input
+          type="text"
           id="search-input"
-          placeholder={t("search.placeholder")+"..."}
-          class="w-full bg-transparent border-0 focus:ring-0 focus:outline-none  text-[var(--text-color)]"
+          placeholder={uiText.search.placeholder + "..."}
+          class="w-full bg-transparent border-0 focus:ring-0 focus:outline-none text-[var(--text-color)]"
           autofocus
         />
         <button id="close-search" class="ml-2 p-2 text-[var(--text-color-70)] rounded-lg hover:bg-[var(--button-hover-color)] active:bg-[var(--button-hover-color)]" aria-label="Close Search">
@@ -58,7 +51,7 @@ const fakeResult: SearchResult[] = [
       </div>
       <div id="search-results" class="overflow-y-auto flex-grow">
         <div class="p-8 text-center text-[var(--text-color-70)]">
-          <p>{t("search.placeholder")}</p>
+          <p>{uiText.search.placeholder}</p>
         </div>
       </div>
     </div>
@@ -74,7 +67,7 @@ function initSearchModal() {
   const modalBackdrop = searchModal?.firstElementChild;
   const modalContent = searchModal?.querySelector('.search-modal-content');
 
-  if (!searchButton || !searchModal) return; // 防止重复绑定
+  if (!searchButton || !searchModal) return;
 
   const openModal = () => {
     searchModal.classList.remove('opacity-0', 'pointer-events-none');
@@ -116,7 +109,6 @@ document.addEventListener('DOMContentLoaded', initSearchModal);
 document.addEventListener('astro:after-swap', initSearchModal);
 </script>
 
-
 <style>
   @keyframes backdropFadeIn {
     0% {
@@ -128,7 +120,7 @@ document.addEventListener('astro:after-swap', initSearchModal);
       backdrop-filter: blur(2px);
     }
   }
-  
+
   @keyframes backdropFadeOut {
     0% {
       opacity: 1;
@@ -139,25 +131,25 @@ document.addEventListener('astro:after-swap', initSearchModal);
       backdrop-filter: blur(0px);
     }
   }
-  
+
   .modal-backdrop {
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(0px);
     transition: opacity 0.3s ease-out;
   }
-  
+
   .modal-backdrop.show {
     animation: backdropFadeIn 0.3s ease-out forwards;
   }
-  
+
   .modal-backdrop:not(.show) {
     animation: backdropFadeOut 0.3s ease-out forwards;
   }
-  
+
   #search-input::-webkit-input-placeholder {
     color: var(--text-color-70);
   }
-  
+
   #search-input::-moz-placeholder {
     color: var(--text-color-70);
   }
@@ -167,10 +159,8 @@ document.addEventListener('astro:after-swap', initSearchModal);
 function initPagefindSearch() {
   const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
-  
-  if (!searchInput || !searchResults) return;
 
-  // 避免重复绑定
+  if (!searchInput || !searchResults) return;
   if (searchInput.dataset.bound === 'true') return;
   searchInput.dataset.bound = 'true';
 
@@ -179,12 +169,11 @@ function initPagefindSearch() {
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value.trim();
     clearTimeout(searchTimeout);
-    
+
     searchTimeout = setTimeout(() => {
       if (query.length > 0) {
         performSearch(query);
       } else {
-        // 清空或显示默认状态
         searchResults.innerHTML = `
           <div class="p-8 text-center text-[var(--text-color-70)]">
             <p>${translations.placeholder}</p>
@@ -204,7 +193,6 @@ async function performSearch(query) {
   } else if (window.pagefind) {
     await window.pagefind.destroy();
     await window.pagefind.init();
-    // console.log('Pagefind is initialized');
     try {
       const searchResultsData = await window.pagefind.search(query);
       const results = [];
@@ -228,10 +216,9 @@ async function performSearch(query) {
       `;
     }
   } else {
-    console.log('Pagefind is not available');
     searchResults.innerHTML = `
       <div class="p-8 text-center text-[var(--text-color-70)]">
-        <p>搜索功能暂时不可用</p>
+        <p>${translations.unavailable}</p>
       </div>
     `;
   }
@@ -260,10 +247,7 @@ function displayResults(results) {
   `).join('');
 }
 
-// ========== 初始化逻辑 ==========
-document.addEventListener('pagefindready', () => {
-  // console.log('Pagefind is ready');
-});
+document.addEventListener('pagefindready', () => {});
 document.addEventListener('pagefindloaderror', () => {
   console.log('Pagefind failed to load, search functionality will not work');
 });
@@ -271,7 +255,6 @@ document.addEventListener('pagefindloaderror', () => {
 document.addEventListener('DOMContentLoaded', initPagefindSearch);
 document.addEventListener('astro:after-swap', initPagefindSearch);
 </script>
-
 
 <style is:global>
 mark {

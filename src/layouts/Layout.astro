@@ -4,8 +4,8 @@ import "@styles/global.css"
 import 'katex/dist/katex.min.css';
 import 'aos/dist/aos.css';
 import 'photoswipe/style.css'
-import { i18n } from "astro:config/client";
 import { ClientRouter } from "astro:transitions";
+import { HTML_LANG } from '@constants/site';
 
 interface Props {
   title: string;
@@ -15,7 +15,7 @@ interface Props {
 const { title, lang, description } = Astro.props;
 
 const pageTitle = title;
-const pageLang = lang || i18n?.defaultLocale || "zh-cn";
+const pageLang = lang || HTML_LANG;
 ---
 
 <!DOCTYPE html>

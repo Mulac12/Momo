@@ -23,14 +23,6 @@ import svelte from "@astrojs/svelte";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://momo.motues.top', // Root URL of site
-  i18n: {
-    locales: ['zh-cn', 'en'],
-    defaultLocale: 'zh-cn',
-    routing: {
-      prefixDefaultLocale: false,
-      redirectToDefaultLocale: false
-    }
-  },
   integrations: [icon({
     include: {
       "fa6-brands": ["*"],

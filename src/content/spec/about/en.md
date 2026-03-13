@@ -6,7 +6,7 @@
 * **Minimalist Design**: Clean page layout with black and white as primary colors, accented by blue
 * **Dark Mode**: Supports manual switching or automatic system adaptation
 * **Article Search**: Implements localized search using [pagefind](https://pagefind.app/)
-* **Internationalization (i18n)**: Supports multilingual switching, currently available in Simplified Chinese and English
+* **Single-language content**: Uses Simplified Chinese content and routes by default
 * **Mobile Optimization**: Components optimized for mobile devices, delivering the same experience as desktop browsers
 * **Commenting System**: Supports local deployment and Cloudflare deployment. Details in [Backend](https://github.com/Motues/Momo-Backend)
 * Additional Core Features: Post categorization, directory, RSS subscription, text statistics, reading time
